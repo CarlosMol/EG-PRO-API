@@ -4,6 +4,8 @@ const initDb = () => {
   db.run(`CREATE TABLE IF NOT EXISTS parcelas (
       id INTEGER PRIMARY KEY,
       nombre TEXT NOT NULL,
+      longitud REAL NOT NULL,
+      latitud REAL NOT NULL,
       area REAL NOT NULL
   )`);
 };
