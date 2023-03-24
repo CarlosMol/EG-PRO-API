@@ -1,7 +1,7 @@
 const { db } = require("../database");
 
-const getParcelas = (callback) => {
-  db.all("SELECT * FROM parcelas", (err, rows) => {
+const getBodegas = (callback) => {
+  db.all("SELECT * FROM bodegas", (err, rows) => {
     if (err) {
       return callback(err);
     }
@@ -9,13 +9,13 @@ const getParcelas = (callback) => {
   });
 };
 
-const createParcela = (data, callback) => {
-  const query = `INSERT INTO parcelas (nombre, cultivo, longitud, latitud, municipio, departamento) VALUES (?, ?, ?, ?, ?, ?)`;
+const createBodega = (data, callback) => {
+  const query = `INSERT INTO bodegas (nombre, capacidad, longitud, latitud, municipio, departamento) VALUES (?, ?, ?, ?, ?, ?)`;
   db.run(
     query,
     [
       data.nombre,
-      data.cultivo,
+      parseInt(data.capacidad),
       parseFloat(data.longitud),
       parseFloat(data.latitud),
       data.municipio,
@@ -30,13 +30,13 @@ const createParcela = (data, callback) => {
   );
 };
 
-const updateParcela = (params, callback) => {
-  const query = `UPDATE parcelas SET nombre = ?, cultivo = ?, longitud = ?, latitud = ?, municipio = ?, departamento = ? WHERE id = ?`;
+const updateBodega = (params, callback) => {
+  const query = `UPDATE bodegas SET nombre = ?, capacidad = ?, longitud = ?, latitud = ?, municipio = ?, departamento = ? WHERE id = ?`;
   db.run(
     query,
     [
       params.data.nombre,
-      params.data.cultivo,
+      parseInt(params.data.capacidad),
       parseFloat(params.data.longitud),
       parseFloat(params.data.latitud),
       params.data.municipio,
@@ -52,8 +52,8 @@ const updateParcela = (params, callback) => {
   );
 };
 
-const deleteParcela = (data, callback) => {
-  const query = `DELETE FROM parcelas WHERE id = ?`;
+const deleteBodega = (data, callback) => {
+  const query = `DELETE FROM bodegas WHERE id = ?`;
   db.run(query, [parseInt(data.id)], (err) => {
     if (err) {
       return callback(err);
@@ -63,8 +63,8 @@ const deleteParcela = (data, callback) => {
 };
 
 module.exports = {
-  getParcelas,
-  createParcela,
-  updateParcela,
-  deleteParcela,
+  getBodegas,
+  createBodega,
+  updateBodega,
+  deleteBodega,
 };
