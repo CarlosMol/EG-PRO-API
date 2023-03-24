@@ -10,21 +10,27 @@ const getSembrados = (callback) => {
 };
 
 const createSembrado = (data, callback) => {
-  const query = `INSERT INTO sembrados (nombre,idParcela, idSemilla) VALUES (?, ?)`;
-  db.run(query, [data.nombre, data.idParcela, data.idSemilla], (err) => {
-    if (err) {
-      return callback(err);
+  const query = `INSERT INTO sembrados (nombre,fechaSiembra,idParcela, idSemilla) VALUES (?, ?, ?, ?)`;
+  db.run(
+    query,
+    [data.nombre, data.fechaSiembra, data.idParcela, data.idSemilla],
+    (err) => {
+      if (err) {
+        console.log(err);
+        return callback(err);
+      }
+      callback(null);
     }
-    callback(null);
-  });
+  );
 };
 
 const updateSembrado = (params, callback) => {
-  const query = `UPDATE sembrados SET nombre = ?, idParcela = ?, idSemilla = ? WHERE id = ?`;
+  const query = `UPDATE sembrados SET nombre = ?, fechaSiembra = ?, idParcela = ?, idSemilla = ? WHERE id = ?`;
   db.run(
     query,
     [
       params.data.nombre,
+      params.data.fechaSiembra,
       params.data.idParcela,
       params.data.idSemilla,
       params.id,
