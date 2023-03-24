@@ -9,8 +9,8 @@ const getParcelas = (req, res) => {
   });
 };
 
-const createParcelas = (req, res) => {
-  parcelasService.createParcelas(req.body, (err, parcelas) => {
+const createParcela = (req, res) => {
+  parcelasService.createParcela(req.body, (err, parcelas) => {
     if (err) {
       return res.status(500).json({ error: "Error al crear las parcelas" });
     }
@@ -18,10 +18,10 @@ const createParcelas = (req, res) => {
   });
 };
 
-const updateParcelas = (req, res) => {
+const updateParcela = (req, res) => {
   const id = req.params.id;
   const data = req.body;
-  parcelasService.updateParcelas({ id, data }, (err, parcelas) => {
+  parcelasService.updateParcela({ id, data }, (err, parcelas) => {
     if (err) {
       return res.status(500).json({ error: "Error al actualizar las parcelas" });
     }
@@ -29,9 +29,9 @@ const updateParcelas = (req, res) => {
   });
 };
 
-const deleteParcelas = (req, res) => {
+const deleteParcela = (req, res) => {
   const id = req.params.id;
-  parcelasService.deleteParcelas({ id }, (err, parcelas) => {
+  parcelasService.deleteParcela({ id }, (err, parcelas) => {
     if (err) {
       return res.status(500).json({ error: "Error al crear las parcelas" });
     }
@@ -41,7 +41,7 @@ const deleteParcelas = (req, res) => {
 
 module.exports = {
   getParcelas,
-  createParcelas,
-  updateParcelas,
-  deleteParcelas,
+  createParcela,
+  updateParcela,
+  deleteParcela,
 };

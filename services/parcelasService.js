@@ -9,7 +9,7 @@ const getParcelas = (callback) => {
   });
 };
 
-const createParcelas = (data, callback) => {
+const createParcela = (data, callback) => {
   const query = `INSERT INTO parcelas (nombre, longitud, latitud, area) VALUES (?, ?, ?, ?)`;
   db.run(
     query,
@@ -28,7 +28,7 @@ const createParcelas = (data, callback) => {
   );
 };
 
-const updateParcelas = (params, callback) => {
+const updateParcela = (params, callback) => {
   const query = `UPDATE parcelas SET nombre = ?, longitud = ?, latitud = ?, area = ? WHERE id = ?`;
   db.run(
     query,
@@ -48,7 +48,7 @@ const updateParcelas = (params, callback) => {
   );
 };
 
-const deleteParcelas = (data, callback) => {
+const deleteParcela = (data, callback) => {
   const query = `DELETE FROM parcelas WHERE id = ?`;
   db.run(query, [parseInt(data.id)], (err) => {
     if (err) {
@@ -60,7 +60,7 @@ const deleteParcelas = (data, callback) => {
 
 module.exports = {
   getParcelas,
-  createParcelas,
-  updateParcelas,
-  deleteParcelas,
+  createParcela,
+  updateParcela,
+  deleteParcela,
 };
