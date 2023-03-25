@@ -9,6 +9,20 @@ const getBodegas = (callback) => {
   });
 };
 
+const getBodegaById = (data, callback) => {
+  const query = `SELECT * FROM bodegas WHERE id = ?`;
+  db.get(query, [parseInt(data.id)], (err,row) => {
+    if (err) {
+      return callback(err);
+    }
+    if (!row) {
+      return callback("No se encontró ninguna fila con ese ID");
+    }
+    console.log(row)
+    callback(null, row);
+  });
+};
+
 const createBodega = (data, callback) => {
   const query = `INSERT INTO bodegas (nombre, capacidad, longitud, latitud, municipio, departamento) VALUES (?, ?, ?, ?, ?, ?)`;
   db.run(
@@ -64,6 +78,7 @@ const deleteBodega = (data, callback) => {
 
 module.exports = {
   getBodegas,
+  getBodegaById,
   createBodega,
   updateBodega,
   deleteBodega,

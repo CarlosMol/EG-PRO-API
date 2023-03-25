@@ -3,6 +3,17 @@ const bodegasService = require("../services/bodegasService");
 const getBodegas = (req, res) => {
   bodegasService.getBodegas((err, bodegas) => {
     if (err) {
+      console.log(err);
+      return res.status(500).json({ error: "Error al obtener las bodegas1" });
+    }
+    res.status(200).json(bodegas);
+  });
+};
+
+const getBodegaById = (req, res) => {
+  const id = req.params.id;
+  bodegasService.getBodegaById({ id }, (err, bodegas) => {
+    if (err) {
       return res.status(500).json({ error: "Error al obtener las bodegas" });
     }
     res.status(200).json(bodegas);
@@ -41,6 +52,7 @@ const deleteBodega = (req, res) => {
 
 module.exports = {
   getBodegas,
+  getBodegaById,
   createBodega,
   updateBodega,
   deleteBodega,

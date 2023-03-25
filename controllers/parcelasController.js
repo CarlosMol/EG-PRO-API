@@ -9,6 +9,16 @@ const getParcelas = (req, res) => {
   });
 };
 
+const getParcelasById = (req, res) => {
+  const id = req.params.id;
+  parcelasService.getParcelasById({ id }, (err, parcelas) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al obtener las parcelas" });
+    }
+    res.status(200).json(parcelas);
+  });
+};
+
 const createParcela = (req, res) => {
   parcelasService.createParcela(req.body, (err, parcelas) => {
     if (err) {
@@ -23,7 +33,9 @@ const updateParcela = (req, res) => {
   const data = req.body;
   parcelasService.updateParcela({ id, data }, (err, parcelas) => {
     if (err) {
-      return res.status(500).json({ error: "Error al actualizar las parcelas" });
+      return res
+        .status(500)
+        .json({ error: "Error al actualizar las parcelas" });
     }
     res.status(200).json({ success: true, parcelas });
   });
@@ -41,6 +53,7 @@ const deleteParcela = (req, res) => {
 
 module.exports = {
   getParcelas,
+  getParcelasById,
   createParcela,
   updateParcela,
   deleteParcela,

@@ -9,6 +9,19 @@ const getParcelas = (callback) => {
   });
 };
 
+const getParcelasById = (data, callback) => {
+  const query = `SELECT * FROM parcelas WHERE id = ?`;
+  db.get(query, [parseInt(data.id)], (err, row) => {
+    if (err) {
+      return callback(err);
+    }
+    if (!row) {
+      return callback("No se encontró ninguna fila con ese ID");
+    }
+    callback(null, row);
+  });
+};
+
 const createParcela = (data, callback) => {
   const query = `INSERT INTO parcelas (nombre, cultivo, longitud, latitud, municipio, departamento) VALUES (?, ?, ?, ?, ?, ?)`;
   db.run(
@@ -64,6 +77,7 @@ const deleteParcela = (data, callback) => {
 
 module.exports = {
   getParcelas,
+  getParcelasById,
   createParcela,
   updateParcela,
   deleteParcela,
