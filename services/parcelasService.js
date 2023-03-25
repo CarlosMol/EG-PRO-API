@@ -10,14 +10,15 @@ const getParcelas = (callback) => {
 };
 
 const createParcela = (data, callback) => {
-  const query = `INSERT INTO parcelas (nombre, longitud, latitud, area) VALUES (?, ?, ?, ?)`;
+  const query = `INSERT INTO parcelas (idPredio, cultivo, longitud, latitud, direccion) VALUES (?, ?, ?, ?, ?)`;
   db.run(
     query,
     [
-      data.nombre,
+      parseInt(data.idPredio),
+      data.cultivo,
       parseFloat(data.longitud),
       parseFloat(data.latitud),
-      parseFloat(data.area),
+      data.direccion,
     ],
     (err) => {
       if (err) {
@@ -29,14 +30,15 @@ const createParcela = (data, callback) => {
 };
 
 const updateParcela = (params, callback) => {
-  const query = `UPDATE parcelas SET nombre = ?, longitud = ?, latitud = ?, area = ? WHERE id = ?`;
+  const query = `UPDATE parcelas SET idPredio = ?, cultivo = ?, longitud = ?, latitud = ?, direccion = ? WHERE id = ?`;
   db.run(
     query,
     [
-      params.data.nombre,
+      parseInt(params.data.idPredio),
+      params.data.cultivo,
       parseFloat(params.data.longitud),
       parseFloat(params.data.latitud),
-      parseFloat(params.data.area),
+      params.data.direccion,
       params.id,
     ],
     (err) => {
